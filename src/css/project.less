@@ -4,6 +4,14 @@
 .season-info {
   font-family: @bold-graphics;
   text-align: center;
+  @media @mobile {
+    font-size: 18px;
+  }
+}
+
+.chatter {
+  padding-bottom: 10px;
+  margin-bottom: 0;
 }
 
 .legend-container {
@@ -11,7 +19,7 @@
   font-family: @block-graphics;
   // border: 1px solid @black;
   // border-radius: 6px;
-  width: 440px;
+  width: 270px;
   @media @mobile {
     width: 90%;
   }
@@ -46,11 +54,21 @@
     vertical-align: text-top;
   }
   padding-bottom: 40px;
+  @media @mobile {
+    padding-bottom: 0;
+    margin-top: 0;
+  }
 }
 
 .credit, .source {
   padding: 0 40px;
   @media @mobile {
     padding: 0;
+  }
+}
+.source {
+  padding-top: 10px;
+  @media @mobile {
+    padding-top: 5px;
   }
 }

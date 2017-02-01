@@ -25,31 +25,31 @@ if (screen.width > 768){//768) {
   var margin = {
     top: 15,
     right: 30,
-    bottom: 40,
+    bottom: 80,
     left: 60
   };
   var width = 650 - margin.left - margin.right;
-  var height = 250 - margin.top - margin.bottom;
+  var height = 400 - margin.top - margin.bottom;
 } else if (screen.width <= 480 && screen.width > 340) {
   console.log("big phone");
   var margin = {
     top: 15,
     right: 40,
-    bottom: 35,
-    left: 30
+    bottom: 110,
+    left: 70
   };
   var width = 360 - margin.left - margin.right;
-  var height = 200 - margin.top - margin.bottom;
+  var height = 350 - margin.top - margin.bottom;
 } else if (screen.width <= 340) {
   console.log("mini iphone")
   var margin = {
     top: 15,
     right: 40,
-    bottom: 35,
-    left: 30
+    bottom: 110,
+    left: 70
   };
   var width = 310 - margin.left - margin.right;
-  var height = 200 - margin.top - margin.bottom;
+  var height = 350 - margin.top - margin.bottom;
 }
 
 // fills in HTML for year as years toggle
@@ -57,7 +57,7 @@ var updateInfo = function(season) {
   document.querySelector(".info").innerHTML = `<strong>${season}</strong>`;
 };
 
-var seasons = ["71-72","72-73","73-74","74-75","75-76","76-77","77-78","78-79","79-80","80-81","81-82","82-83","83-84","84-85","85-86","86-87","87-88","88-89","89-90","90-91","91-92","92-93","93-94","94-95","95-96","96-97","97-98","98-99","99-00","00-01","01-02","02-03","03-04","04-05","05-06","06-07","07-08","08-09","09-10","10-11","11-12","12-13","13-14","14-15","15-16","16-17"];
+var seasons = ["1971-72","1972-73","1973-74","1974-75","1975-76","1976-77","1977-78","1978-79","1979-80","1980-81","1981-82","1982-83","1983-84","1984-85","1985-86","1986-87","1987-88","1988-89","1989-90","1990-91","1991-92","1992-93","1993-94","1994-95","1995-96","1996-97","1997-98","1998-99","1999-00","2000-01","2001-02","2002-03","2003-04","2004-05","2005-06","2006-07","2007-08","2008-09","2009-10","2010-11","2011-12","2012-13","2013-14","2014-15","2015-16","2016-17"];
 var i = 0;
 
 var loop = null;
@@ -71,7 +71,7 @@ var tickTime = function() {
 
 tickTime();
 
-// for debugging
+// // for debugging
 // drawBars(seasons[0]);
 // drawBars(seasons[42]);
 // drawBars(seasons[43]);
@@ -83,7 +83,7 @@ function drawBars(selectedSeason) {
   var barData = winsData.filter(function(data) { return data.Season == selectedSeason });
   var barDataWins = barData.slice();
 
-  if (String(selectedSeason) == "71-72") {
+  if (String(selectedSeason) == "1971-72") {
 	   d3.select("#win-chart").select("svg").remove();
 
      svg = d3.select("#win-chart").append('svg')
@@ -110,7 +110,7 @@ function drawBars(selectedSeason) {
           .style("text-anchor", "end")
           .attr("dx", "-.8em")
           .attr("dy", ".15em")
-          .attr("transform", "rotate(-65)" )
+          .attr("transform", "rotate(-55)" )
      } else {
        svg.append("g")
         .attr("transform", "translate(0," + height + ")")
@@ -129,8 +129,8 @@ function drawBars(selectedSeason) {
          .append("text")
          .attr("class", "label")
          .attr("transform", "rotate(-90)")
-         .attr("y", 0)
-         .attr("x", -10)
+         .attr("y", -70)
+         .attr("x", 0)
          .attr("dy", "20px")
          .style("text-anchor", "end")
          .style("fill","black")
@@ -160,7 +160,11 @@ function drawBars(selectedSeason) {
    var linefunc = d3.line()
        .x(function(d) {
          if (d.x == "Geno Auriemma") {
-           return x(d.x)+4*bar_spacing;
+           if (screen.width <= 480) {
+             return x(d.x)+2*bar_spacing;
+           } else {
+             return x(d.x)+4*bar_spacing+10;
+           }
          } else {
            return x(d.x)-3;
          }
@@ -192,7 +196,7 @@ function drawBars(selectedSeason) {
       .attr("width", x.bandwidth())
       .attr("y", function(d) {
         if (d.value == 865) {
-          return y(948);
+          return y(966);
         } else {
           return y(d.value);
         }
@@ -209,7 +213,7 @@ function drawBars(selectedSeason) {
       })
       .attr("height", function(d) {
         if (d.value == 865){
-          return y(865) - y(948);
+          return y(865) - y(966);
         } else {
           return height - y(d.value);
         }
