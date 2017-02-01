@@ -1,0 +1,56 @@
+@wins: #6790B7;
+@vacatedwins: red;
+
+.season-info {
+  font-family: @bold-graphics;
+  text-align: center;
+}
+
+.legend-container {
+  font-size: 12px;
+  font-family: @block-graphics;
+  // border: 1px solid @black;
+  // border-radius: 6px;
+  width: 440px;
+  @media @mobile {
+    width: 90%;
+  }
+  margin: auto;
+  // margin-bottom: 40px;
+  &.nopadding {
+    margin-bottom: 0;
+  }
+  padding: 4px;
+  .display-flex;
+  .flex-wrap(wrap);
+  @media @mobile {
+    margin: 15px auto;
+  }
+  .element {
+    .flex(0 0 50%);
+    @media @mobile {
+      .flex(0 0 90%);
+    }
+  }
+  .wins-swath, .vacatedwins-swath  {
+    height: 14px;
+    width: 14px;
+    margin: 4px;
+    border-radius: 2px;
+  }
+  .wins-swath {background: @wins}
+  .vacatedwins-swath {background: @vacatedwins}
+  .legend-text {
+    width: 180px;
+    padding-left: 20px;
+    vertical-align: text-top;
+  }
+  padding-bottom: 40px;
+}
+
+.credit, .source {
+  padding: 0 40px;
+  @media @mobile {
+    padding: 0;
+  }
+}
