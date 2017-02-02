@@ -34,7 +34,7 @@ if (screen.width > 768){//768) {
   console.log("big phone");
   var margin = {
     top: 15,
-    right: 40,
+    right: 60,
     bottom: 110,
     left: 70
   };
@@ -44,7 +44,7 @@ if (screen.width > 768){//768) {
   console.log("mini iphone")
   var margin = {
     top: 15,
-    right: 40,
+    right: 50,
     bottom: 110,
     left: 70
   };
@@ -65,16 +65,18 @@ var tickTime = function() {
   drawBars(seasons[i]);
   updateInfo(seasons[i]);
   i = (i + 1) % seasons.length;
-  loop = setTimeout(tickTime, i == 0 ? 10000 : 1000);
+  loop = setTimeout(tickTime, i == 0 ? 10000 : 500);
   // loop = setTimeout(tick, i == 0 ? 1700 : 1000);
 };
 
 tickTime();
 
-// // for debugging
+// for debugging
 // drawBars(seasons[0]);
-// drawBars(seasons[42]);
-// drawBars(seasons[43]);
+// // drawBars(seasons[42]);
+// // drawBars(seasons[43]);
+// drawBars(seasons[44]);
+// drawBars(seasons[45]);
 
 var svg, x, y;
 
@@ -93,7 +95,7 @@ function drawBars(selectedSeason) {
        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     //  x = d3.scaleTime().range([0, width]);
-     x = d3.scaleBand().rangeRound([0, width]).padding(0.02);
+     x = d3.scaleBand().rangeRound([0, width]).padding(0.05);
      y = d3.scaleLinear().rangeRound([height, 0]);
 
      // x-axis scale
@@ -186,7 +188,7 @@ function drawBars(selectedSeason) {
       .data(barData)
     .enter().append("rect")
       .style("fill", function(d){
-        if(d.value == 865) {
+        if(d.value == 966 || d.value == 985 || d.value == 998) {
           return "red";
         } else {
           return "#6790B7";
@@ -195,8 +197,12 @@ function drawBars(selectedSeason) {
       .attr("x", function(d) { return x(d.Coach); })
       .attr("width", x.bandwidth())
       .attr("y", function(d) {
-        if (d.value == 865) {
+        if (d.value == 966) {
           return y(966);
+        } else if (d.value == 985) {
+          return y(985);
+        } else if (d.value == 998) {
+          return y(998);
         } else {
           return y(d.value);
         }
@@ -207,13 +213,17 @@ function drawBars(selectedSeason) {
       //   return 0.3;//(0.15*(d.Year- +2010));
       // })
       .transition()
-      .duration(200)
-      .delay(function (d, i) {
-        return i * 200;
-      })
+      .duration(100)
+      // .delay(function (d, i) {
+      //   return i * 100;
+      // })
       .attr("height", function(d) {
-        if (d.value == 865){
+        if (d.value == 966){
           return y(865) - y(966);
+        } else if (d.value == 985) {
+          return y(884) - y(985);
+        } else if (d.value == 998) {
+          return y(897) - y(998);
         } else {
           return height - y(d.value);
         }
